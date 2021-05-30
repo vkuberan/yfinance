@@ -1,4 +1,5 @@
 # Build and Release Folders
+__pycache__/
 bin-debug/
 bin-release/
 [Oo]bj/
