@@ -58,6 +58,11 @@ def find_std_and_mean(data):
     fib_retrace_3 = high_max - (0.50 * diff)
     fib_retrace_4 = high_max - (0.618 * diff)
 
+    fib_retrace_1 = round(fib_retrace_1, 2)
+    fib_retrace_2 = round(fib_retrace_2, 2)
+    fib_retrace_3 = round(fib_retrace_3, 2)
+    fib_retrace_4 = round(fib_retrace_4, 2)
+
     msg += "Fibonacci Retracement Level\n"
     msg += "Level 1 at 0.236: {}\n".format(fib_retrace_1)
     msg += "Level 2 at 0.382: {}\n".format(fib_retrace_2)
@@ -69,6 +74,11 @@ def find_std_and_mean(data):
     # non fib is added in some calculations
     fib_ext_3 = high_max + (0.50 * diff)
     fib_ext_4 = high_max + (0.618 * diff)
+
+    fib_ext_1 = round(fib_ext_1, 2)
+    fib_ext_2 = round(fib_ext_2, 2)
+    fib_ext_3 = round(fib_ext_3, 2)
+    fib_ext_4 = round(fib_ext_4, 2)
 
     msg += "Fibonacci Extensions Level\n"
     msg += "Level 1 at 0.236: {}\n".format(fib_ext_1)
