@@ -7,6 +7,7 @@ keepAlive = True
 listed_companies = get_nse_listed_companies()
 coff_day = 7
 day_or_hour = 'D'
+
 while keepAlive:
 
     clear_screen()
@@ -37,10 +38,12 @@ while keepAlive:
 
         if Path(csv_file_name).is_file() and Path(json_file_name).is_file():
 
+            # Hourly data
             if day_or_hour == 'H':
                 technical_analysis(company_name, company_full_name,
                                    csv_file_name, json_file_name, coff_day)
             else:
+                # Day to day analysis
                 technical_analysis_day(company_name, company_full_name,
                                        csv_file_name, stock_dates)
         else:
