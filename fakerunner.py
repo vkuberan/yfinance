@@ -3,6 +3,9 @@ from pathlib import Path
 from commonfunctions import *
 from technicalanalysis import *
 
+# To get futures and options data
+# https://www1.nseindia.com/products/content/derivatives/equities/historical_fo.htm
+# https://stockcharts.com/h-sc/ui?s=RELIANCE.IN
 
 keepAlive = True
 listed_companies = get_nse_listed_companies()
@@ -38,6 +41,33 @@ while keepAlive:
 
             # Creating the dataframe
             csv_data = pd.read_csv(csv_file_name)
+       
+            csv_data['DATE'] = csv_data['Date']
+
+            csv_data['OPEN'] = csv_data['Open'].apply(
+                lambda x: round(float(x), 2))
+
+            csv_data['HIGH'] = csv_data['High'].apply(
+                lambda x: round(float(x), 2))
+
+            csv_data['LOW'] = csv_data['Low'].apply(
+                lambda x: round(float(x), 2))
+
+            csv_data['CLOSE'] = csv_data['Close'].apply(
+                lambda x: round(float(x), 2))
+
+            csv_data['VOLUME'] = csv_data['Volume']
+
+            sw = start_date.strftime('%Y-%m-%d')
+            ew = end_date.strftime('%Y-%m-%d')
+
+            mask = (csv_data['DATE'] >= sw) & (
+                csv_data['DATE'] <= ew)
+
+            csv_data = csv_data.loc[mask]
+            
+            range_high = csv_data['HIGH'].max()
+            range_low = csv_data['LOW'].min()
 
             low_gain = 0
             low_gain_total = 0
@@ -61,22 +91,6 @@ while keepAlive:
 
                 sw = start_of_week.strftime('%Y-%m-%d')
                 ew = end_of_week.strftime('%Y-%m-%d')
-
-                csv_data['DATE'] = csv_data['Date']
-
-                csv_data['OPEN'] = csv_data['Open'].apply(
-                    lambda x: round(float(x), 2))
-
-                csv_data['HIGH'] = csv_data['High'].apply(
-                    lambda x: round(float(x), 2))
-
-                csv_data['LOW'] = csv_data['Low'].apply(
-                    lambda x: round(float(x), 2))
-
-                csv_data['CLOSE'] = csv_data['Close'].apply(
-                    lambda x: round(float(x), 2))
-
-                csv_data['VOLUME'] = csv_data['Volume']
 
                 csv_data.set_index('DATE')
 
@@ -121,14 +135,14 @@ while keepAlive:
                         low_price_diff, low_change_percentage)
 
                     if (high_change_percentage >= 0.0 and
-                            high_change_percentage <= 1.0):
+                            high_change_percentage <= 0.50):
 
                         if close_change_percentage <= 0.0:
                             high_gain += 1
 
                         high_gain_total += 1
 
-                    if (low_change_percentage >= -1.0 and
+                    if (low_change_percentage >= -0.50 and
                             low_change_percentage <= 0.0):
                         if close_change_percentage >= 0.0:
                             low_gain += 1
@@ -145,7 +159,8 @@ while keepAlive:
                     success_rate = round(
                         (high_gain / high_gain_total) * 100, 2)
 
-                print("\n\nHIGH GAIN TOTAL: {}, HIGH GAIN (0% - 1%): {}, Sucess Rate: {}".format(
+                print("\n\nINTRADAY")
+                print("[SELL] [OPEN - HIGH STRATEGY] TOTAL: {}, HIGH GAIN (0% - 0.50%): {}, Success Rate: {}".format(
                     high_gain_total, high_gain, success_rate
                 ))
 
@@ -153,12 +168,27 @@ while keepAlive:
                 if low_gain > 0 and low_gain_total > 0:
                     success_rate = round((low_gain / low_gain_total) * 100, 2)
 
-                print("LOW GAIN TOTAL: {}, LOW GAIN (0% - 1%): {}, Sucess Rate: {}".format(
+                print("[BUY] [OPEN - LOW STRATEGY] TOTAL: {}, LOW GAIN (0% - 0.50%): {}, Success Rate: {}".format(
                     low_gain_total, low_gain, success_rate
                 ))
 
                 input("Press any key to continue...")
+            
+            range_diff = range_high - range_low
+            Level_0 = range_high
+            Level_1 = round(range_high - (range_diff * 0.236), 2)
+            Level_2 = round(range_high - (range_diff * 0.382), 2)
+            Level_3 = round(range_high - (range_diff * 0.50), 2)            
+            Level_4 = round(range_high - (range_diff * 0.618), 2)
+            Level_5 = round(range_high - (range_diff * 0.786), 2)
+            Highest_Level = range_low
 
+            print("Range High: {}, Range Low: {}".format(range_high, range_low))
+            print("Level 1 (0.236): {}".format(Level_1))
+            print("Level 2 (0.382): {}".format(Level_2))
+            print("Level 3 (0.50): {}".format(Level_3))
+            print("Level 4 (0.618): {}".format(Level_4))
+            print("Level 5 (0.786): {}".format(Level_5))
             input("Press any key to continue...")
 
         else:
