@@ -95,6 +95,7 @@ def technical_analysis(symbol, company_name, csv_file_name, json_file_name,
     stock_close = data['chart']['result'][0]['indicators']['quote'][0]['close']
     stock_high = data['chart']['result'][0]['indicators']['quote'][0]['high']
     stock_low = data['chart']['result'][0]['indicators']['quote'][0]['low']
+    stock_volume = data['chart']['result'][0]['indicators']['quote'][0]['volume']
     timestamps = data['chart']['result'][0]['timestamp']
 
     # Creating the dataframe
@@ -104,7 +105,8 @@ def technical_analysis(symbol, company_name, csv_file_name, json_file_name,
             "OPEN": stock_open,
             "HIGH": stock_high,
             "LOW": stock_low,
-            "CLOSE": stock_close
+            "CLOSE": stock_close,
+            "VOLUME": stock_volume
         }
     )
 
