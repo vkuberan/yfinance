@@ -177,7 +177,7 @@ while keepAlive:
                     low_gain_total, low_gain, success_rate
                 ))
 
-                input("Press any key to continue...")
+                # input("Press any key to continue...")
 
             range_diff = range_high - range_low
             Level_0 = range_high
