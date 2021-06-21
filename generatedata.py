@@ -53,6 +53,7 @@ for file in files:
         if ((symbol == 'NIFTY 50') or (symbol == 'NIFTY 100')
                 or (symbol == 'NIFTY 200')):
             symbol = '%5ENSEI'
+            continue
         else:
             symbol = symbol + '.NS'
 
@@ -79,3 +80,5 @@ for file in files:
                 writer.write(content)
 
         time.sleep(1)
+
+# Get the Nifty Indices

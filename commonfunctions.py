@@ -13,7 +13,8 @@ YEAR_BEFORE = CURRENT_DAY - timedelta(days=365)
 CURRENT_DAY_TS = datetime.timestamp(CURRENT_DAY)
 THREE_MONTHS_BEFORE_TS = datetime.timestamp(THREE_MONTHS_BEFORE)
 SIX_MONTHS_BEFORE_TS = datetime.timestamp(SIX_MONTHS_BEFORE)
-YEAR_BEFORE_TS = datetime.timestamp(YEAR_BEFORE)
+# YEAR_BEFORE_TS = datetime.timestamp(YEAR_BEFORE)
+YEAR_BEFORE_TS = 1577840401
 
 
 # related to date and time
