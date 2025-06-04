@@ -306,8 +306,8 @@ def analyze_sell_call(sell_data, stock_data):
         temp_days_high_time = str(
             days_high['DATETIME'].iloc[0]).split(" ")[1]
 
-        human_readable_days_low = "DAY's HIGH: [{:<10} TIME: {:8}]".format(
-            day_low_price, temp_days_high_time
+        human_readable_days_high = "DAY's HIGH: [{:<10} TIME: {:8}]".format(
+            day_high_price, temp_days_high_time
         )
 
         open_low_perc_diff = round(
@@ -338,7 +338,7 @@ def analyze_sell_call(sell_data, stock_data):
             )
             tmp_msg += "{:<11} OPEN: {:<10} LOW: {:<10} {:<18} ".format(
                 ' ', open_price, open_low_price,
-                human_readable_days_low
+                human_readable_days_high
             )
             tmp_msg += "CLOSE: {:<10} HIGH: {:<10}\n\n".format(
                 close_price, day_high_price
@@ -360,7 +360,7 @@ def analyze_sell_call(sell_data, stock_data):
             )
             tmp_msg += "{:<10} OPEN: {:<10} LOW: {:<10} {:<18} ".format(
                 ' ', open_price, open_low_price,
-                human_readable_days_low
+                human_readable_days_high
             )
             tmp_msg += "CLOSE: {:<10} HIGH: {:<10}\n\n".format(
                 close_price, day_high_price
