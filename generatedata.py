@@ -1,4 +1,4 @@
-# run this file often to get the fresh day. Run atleast once
+# run this file often to get the fresh day. Run at least once
 # during trading days.
 import glob
 import time
@@ -13,7 +13,7 @@ clear_screen()
 
 
 if is_time_between((9, 15), (11, 29)):
-    print("Sorry You cann't run this script between 9:30 AM to 11:59PM")
+    print("Sorry, you can't run this script between 9:15 AM and 11:29 AM")
     exit()
 
 
